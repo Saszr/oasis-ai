@@ -11,6 +11,8 @@ import {
   Tag,
   Box,
   Divider,
+  InputGroup,
+  InputRightAddon,
 } from '@chakra-ui/react';
 import { useKeyPress } from 'ahooks';
 import dayjs from 'dayjs';
@@ -213,21 +215,27 @@ export default function AutoCreateContract() {
 
       <Stack spacing={4}>
         <FormControl>
-          <FormLabel>
-            <StatusLabel status={status.nft_name}>NFT 名称</StatusLabel>
-          </FormLabel>
-          <Input id="nft_name" {...register('nft_name')} />
+          <Flex justifyItems={'center'} alignItems="center">
+            <FormLabel w={'120px'}>
+              <StatusLabel status={status.nft_name}>NFT 名称</StatusLabel>
+            </FormLabel>
+            <Box>
+              <Input id="nft_name" {...register('nft_name')} />
+            </Box>
+          </Flex>
         </FormControl>
 
         <FormControl>
-          <FormLabel>
-            <StatusLabel status={status.chain}>公链</StatusLabel>
-          </FormLabel>
-          <ChainRadioGroup
-            name="chain"
-            control={control}
-            valuesGroup={['ETH']}
-          />
+          <Flex justifyItems={'center'} alignItems="center">
+            <FormLabel w={'120px'}>
+              <StatusLabel status={status.chain}>公链</StatusLabel>
+            </FormLabel>
+            <ChainRadioGroup
+              name="chain"
+              control={control}
+              valuesGroup={['ETH']}
+            />
+          </Flex>
         </FormControl>
 
         <FormControl>
@@ -262,41 +270,61 @@ export default function AutoCreateContract() {
         </FormControl>
 
         <FormControl>
-          <FormLabel>
-            <StatusLabel status={status.nft_attribute_total}>
-              属性总数
-            </StatusLabel>
-          </FormLabel>
-          <Input
-            id="nft_attribute_total"
-            {...register('nft_attribute_total')}
-          />
+          <Flex justifyItems={'center'} alignItems="center">
+            <FormLabel w={'130px'}>
+              <StatusLabel status={status.nft_attribute_total}>
+                属性总数
+              </StatusLabel>
+            </FormLabel>
+            <Box>
+              <Input
+                id="nft_attribute_total"
+                {...register('nft_attribute_total')}
+              />
+            </Box>
+          </Flex>
         </FormControl>
 
         <FormControl>
-          <FormLabel>
-            <StatusLabel status={status.nft_num_total}>NFT 总数</StatusLabel>
-          </FormLabel>
-          <Input id="nft_num_total" {...register('nft_num_total')} />
+          <Flex justifyItems={'center'} alignItems="center">
+            <FormLabel w={'130px'}>
+              <StatusLabel status={status.nft_num_total}>NFT 总数</StatusLabel>
+            </FormLabel>
+            <Box>
+              <Input id="nft_num_total" {...register('nft_num_total')} />
+            </Box>
+          </Flex>
         </FormControl>
 
         <FormControl>
-          <FormLabel>
-            <StatusLabel status={status.mint_price}>铸造价格</StatusLabel>
-          </FormLabel>
-          <Input id="mint_price" {...register('mint_price')} />
+          <Flex justifyItems={'center'} alignItems="center">
+            <FormLabel w={'130px'}>
+              <StatusLabel status={status.mint_price}>铸造价格</StatusLabel>
+            </FormLabel>
+            <Box>
+              <Input id="mint_price" {...register('mint_price')} />
+            </Box>
+          </Flex>
         </FormControl>
 
         <FormControl>
-          <FormLabel>
-            <StatusLabel status={status.creator_revenue_sharing}>
-              创作者分成
-            </StatusLabel>
-          </FormLabel>
-          <Input
-            id="creator_revenue_sharing"
-            {...register('creator_revenue_sharing')}
-          />
+          <Flex justifyItems={'center'} alignItems="center">
+            <FormLabel w={'130px'}>
+              <StatusLabel status={status.creator_revenue_sharing}>
+                创作者分成
+              </StatusLabel>
+            </FormLabel>
+
+            <Box maxW={'200px'}>
+              <InputGroup>
+                <Input
+                  id="creator_revenue_sharing"
+                  {...register('creator_revenue_sharing')}
+                />
+                <InputRightAddon children="@" />
+              </InputGroup>
+            </Box>
+          </Flex>
         </FormControl>
       </Stack>
 
@@ -354,7 +382,7 @@ export default function AutoCreateContract() {
 
               const { data } = await axios({
                 method: 'post',
-                url: 'http://eclair.spike.network:3000/api/v1/compile',
+                url: 'https://aibk.oasis.world/api/v1/compile',
                 headers: { 'Content-Type': 'multipart/form-data' },
                 data: bodyFormData,
               });
