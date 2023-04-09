@@ -102,7 +102,7 @@ export default function AutoCreateContract() {
     defaultValues: {
       nft_name: '',
       chain: 'ETH',
-      nft_style: '2D',
+      nft_style: '',
       nft_attribute_total: '40',
       nft_num_total: '100',
       mint_price: '',
@@ -110,13 +110,32 @@ export default function AutoCreateContract() {
     },
   });
 
-  useKeyPress('ctrl.i', () => {
-    setValue('nft_name', 'Chainsaw_Man');
+  useKeyPress('ctrl.7', () => {
+    setValue('nft_style', '2D');
   });
 
-  useKeyPress('ctrl.o', () => {
-    setValue('mint_price', '0.01');
+  useKeyPress('ctrl.8', () => {
+    setValue('nft_name', 'Tool_Man');
   });
+
+  useKeyPress('ctrl.9', () => {
+    setValue('mint_price', '0');
+  });
+
+  useKeyPress('ctrl.0', () => {
+    handleCreate();
+  });
+
+  const handleCreate = () => {
+    setCreateLoading(true);
+    setTimeout(() => {
+      setCreateLoading(false);
+      setSolCodeReady(true);
+      updateBtnStatus((draft) => {
+        draft.deploy = true;
+      });
+    }, 3000);
+  };
 
   const { open } = useWeb3Modal();
   const { data: signer } = useSigner();
@@ -132,7 +151,7 @@ export default function AutoCreateContract() {
       const factory = new ethers.ContractFactory(abi, bin, signer);
 
       factory
-        .deploy(nft_name, 'DEMO')
+        .deploy(nft_name, 'TM')
         .then((contract) => {
           setDeployLoading(false);
 
@@ -321,7 +340,7 @@ export default function AutoCreateContract() {
                   id="creator_revenue_sharing"
                   {...register('creator_revenue_sharing')}
                 />
-                <InputRightAddon children="@" />
+                <InputRightAddon children="%" />
               </InputGroup>
             </Box>
           </Flex>
@@ -340,15 +359,8 @@ export default function AutoCreateContract() {
         <Box>
           <Button
             variant="outline"
-            onClick={async () => {
-              setCreateLoading(true);
-              setTimeout(() => {
-                setCreateLoading(false);
-                setSolCodeReady(true);
-                updateBtnStatus((draft) => {
-                  draft.deploy = true;
-                });
-              }, 3000);
+            onClick={() => {
+              handleCreate();
             }}
             color="gray.500"
             borderRadius={'10px'}
