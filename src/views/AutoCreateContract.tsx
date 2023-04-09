@@ -163,9 +163,7 @@ export default function AutoCreateContract() {
             txHash: contract.deployTransaction.hash,
           });
 
-          window.open(
-            `https://goerli.etherscan.io/address/${contract.address}`,
-          );
+          window.open(`https://etherscan.io/address/${contract.address}`);
         })
         .catch(() => {
           setDeployLoading(false);

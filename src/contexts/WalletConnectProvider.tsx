@@ -1,6 +1,6 @@
 import { WagmiConfig, createClient, configureChains } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
-import { goerli } from 'wagmi/chains';
+import { mainnet } from 'wagmi/chains';
 import { EthereumClient, modalConnectors } from '@web3modal/ethereum';
 import { Web3Modal } from '@web3modal/react';
 
@@ -14,7 +14,7 @@ if (!process.env.NEXT_PUBLIC_PROJECT_ID)
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
-const { provider, chains } = configureChains([goerli], [publicProvider()]);
+const { provider, chains } = configureChains([mainnet], [publicProvider()]);
 
 const connectors = modalConnectors({
   projectId,
